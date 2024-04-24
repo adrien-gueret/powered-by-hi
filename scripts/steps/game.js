@@ -7,6 +7,7 @@ import {
   getUserName,
   getResultIcon,
   clearMenu,
+  showAchievement,
 } from "../ui.js";
 import activitiesHome from "./activitiesHome.js";
 
@@ -185,6 +186,8 @@ export default async function () {
       );
       await initNewGame(goals[i]);
     }
+
+    showAchievement("Albert Einstein");
 
     await addMessage(generatingMessage, "ai", false);
     await addFakeLoader({ loadingTime: 500, success: false });

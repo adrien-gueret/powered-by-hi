@@ -1,6 +1,11 @@
 import { addAnxiety, addMaxPossibleAnxiety, isAnxious } from "../state.js";
 
-import { addMessage, addMenuButton, setUserColor } from "../ui.js";
+import {
+  addMessage,
+  addMenuButton,
+  setUserColor,
+  showAchievement,
+} from "../ui.js";
 
 export default async function () {
   setUserColor("#fff");
@@ -35,6 +40,8 @@ export default async function () {
 
           if (title === "None of them") {
             addAnxiety();
+
+            showAchievement("Louis Braille");
 
             await addMessage(
               isAnxious()

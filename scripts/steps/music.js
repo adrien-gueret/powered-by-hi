@@ -2,7 +2,12 @@ import { softMusic, dynamicMusic, retroMusic } from "../audio.js";
 
 import { addAnxiety, addMaxPossibleAnxiety, isAnxious } from "../state.js";
 
-import { addMessage, addMenuButton, clearMenu } from "../ui.js";
+import {
+  addMessage,
+  addMenuButton,
+  clearMenu,
+  showAchievement,
+} from "../ui.js";
 
 export default async function () {
   await addMessage(
@@ -22,6 +27,8 @@ export default async function () {
           `<p>Great!<br />Do you prefer a soft music or a more dynamic one? I also have something more "retro" if you prefer.</p>`,
           "ai"
         );
+
+        const listenedMusics = [];
 
         function showButtons(musicToConfirm) {
           clearMenu();
@@ -54,6 +61,10 @@ export default async function () {
                   }
                 });
 
+                if (!listenedMusics.includes(title)) {
+                  listenedMusics.push(title);
+                }
+
                 await addMessage(
                   hasConfirmed
                     ? "I confirm this music."
@@ -63,6 +74,10 @@ export default async function () {
 
                 if (hasConfirmed) {
                   addMaxPossibleAnxiety(2);
+
+                  if (listenedMusics.length === 3) {
+                    showAchievement("Ludwig van Beethoven");
+                  }
 
                   await addMessage(
                     "<p>Perfect, I keep it in the background. Let's keep going!</p>",

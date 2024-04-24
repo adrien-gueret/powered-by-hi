@@ -1,4 +1,11 @@
-import { getAnxiety } from "./state.js";
+import {
+  getAnxiety,
+  unlockAchievement,
+  getAchievement,
+  getUnlockedAchievements,
+  hasUnlockedAchievement,
+  achievements,
+} from "./state.js";
 import { random } from "./utils.js";
 
 const poweredByTarget = document.getElementById("powered-by-target");
@@ -45,7 +52,9 @@ export function scrollToBottom() {
       behavior: "smooth",
     });
   } else if (lastMessageContent) {
-    lastMessageContent.scrollIntoView({
+    const elementToScrollTo =
+      lastMessageContent.lastElementChild || lastMessageContent;
+    elementToScrollTo.scrollIntoView({
       behavior: "smooth",
     });
   }
@@ -55,7 +64,11 @@ const loaderHTML = '<span class="loader"><span></span></span>';
 
 export async function addMessage(content, senderType, shouldShowLoader = true) {
   if (senderType === "ai" && shouldShowLoader) {
-    const container = await addMessage(loaderHTML, "ai", false);
+    const container = await addMessage(
+      `<p class="loading-message">${loaderHTML}</p>`,
+      "ai",
+      false
+    );
 
     return new Promise((resolve) => {
       setTimeout(() => {
@@ -81,7 +94,10 @@ export async function addMessage(content, senderType, shouldShowLoader = true) {
     isFromPlayer ? userColor : `rgba(0,0,0,${getAnxiety() / 100})`
   };"`;
   const message = document.createElement("li");
-  const senderName = isFromPlayer ? userName : poweredByTarget.innerHTML;
+  const totalStars = getUnlockedAchievements().length;
+  const senderName = isFromPlayer
+    ? `${userName}${totalStars > 0 ? ` ${"⭐".repeat(totalStars)}` : ""}`
+    : poweredByTarget.innerHTML;
   const avatarClassName = isFromPlayer
     ? "player"
     : senderName.toLocaleLowerCase();
@@ -186,6 +202,7 @@ export function addMenuButton({
   description,
   onClick,
   disableClearMenu = false,
+  disableScroll = false,
 }) {
   const choiceItem = document.createElement("li");
   choiceItem.className = "choice-item";
@@ -218,13 +235,119 @@ export function addMenuButton({
 
   chatMenu.appendChild(choiceItem);
 
-  scrollToBottom();
+  if (!disableScroll) {
+    scrollToBottom();
+  }
 
   return choiceItem;
 }
 
+function getAchievementNode(title, emoji, description) {
+  const node = document.createElement("article");
+
+  node.classList.add("achievement");
+  node.innerHTML = `<div class="achievement-image">${emoji}</div><div class="achievement-text"><span class="achievement-title">${title}</span><p class="achievement-description">${description}</p></div>`;
+
+  return node;
+}
+
+export function showAchievement(name) {
+  if (!unlockAchievement(name)) {
+    return;
+  }
+
+  const { title, emoji, description } = getAchievement(name);
+  const popover = getAchievementNode(title, emoji, description);
+  popover.popover = "manual";
+
+  document.body.appendChild(popover);
+
+  popover.addEventListener("toggle", (event) => {
+    if (event.newState === "open") {
+      for (let achievementNotification of document.querySelectorAll(
+        ".achievement"
+      )) {
+        if (achievementNotification !== popover) {
+          const { top } = achievementNotification.style;
+          const prevValue = top ? parseInt(top, 10) : 100;
+          const newValue = parseInt(prevValue, 10) + popover.clientHeight + 40;
+          achievementNotification.style.top = `${newValue}px`;
+        }
+      }
+    }
+  });
+
+  popover.showPopover();
+
+  let clock = null;
+
+  const closePopover = async () => {
+    if (clock) {
+      clearTimeout(clock);
+    }
+
+    const animation = popover.animate([{ transform: `translateX(500px)` }], {
+      duration: 333,
+      iterations: 1,
+      easing: "ease-out",
+    });
+
+    await animation.finished;
+
+    popover.hidePopover();
+    popover.remove();
+  };
+
+  clock = setTimeout(closePopover, 6000);
+  popover.onclick = closePopover;
+}
+
+export function showAllAchievements() {
+  const container = document.createElement("div");
+  container.className = "achievements";
+
+  const totalUnlocked = getUnlockedAchievements().length;
+  const label = document.createElement("p");
+  label.className = "resume";
+  label.innerHTML = `<hr />You have unlocked <b>${totalUnlocked}</b> achivement${
+    totalUnlocked > 1 ? "s" : ""
+  } out of <b>${achievements.length}</b>!<br />${"⭐".repeat(totalUnlocked)}`;
+
+  if (totalUnlocked === achievements.length) {
+    label.innerHTM += '<br /><span class="big-text">CONGRATULATIONS!</span>';
+  }
+
+  container.appendChild(label);
+
+  achievements.forEach(({ title, emoji, description }) => {
+    const isUnlocked = hasUnlockedAchievement(title);
+
+    const node = getAchievementNode(
+      isUnlocked ? title : "???",
+      isUnlocked ? emoji : "❓",
+      description
+    );
+
+    node.classList.add(isUnlocked ? "unlocked" : "locked");
+
+    container.appendChild(node);
+  });
+
+  chatMenu.parentNode.insertBefore(container, chatMenu);
+
+  window.scrollBy({ top: 40, behavior: "smooth" });
+}
+
 export default function init() {
+  userColor = "#fff";
+  userName = "You";
+
   poweredByTarget.innerHTML = "AI";
   document.title = "powered by AI";
   poweredByTarget.style.removeProperty("opacity");
+  const achievements = document.querySelector(".achievements");
+
+  if (achievements) {
+    achievements.remove();
+  }
 }

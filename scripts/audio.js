@@ -47,7 +47,7 @@ function initSoftMusic() {
     stop() {
       timeouts.forEach(clearTimeout);
       timeouts = [];
-      audioCtx?.close();
+      audioCtx && audioCtx.close();
       audioCtx = null;
     },
   };
@@ -99,7 +99,7 @@ function initDynamicMusic() {
     stop() {
       timeouts.forEach(clearTimeout);
       timeouts = [];
-      audioCtx?.close();
+      audioCtx && audioCtx.close();
       audioCtx = null;
     },
   };
@@ -160,7 +160,7 @@ function initRetroMusic() {
     stop() {
       timeouts.forEach(clearTimeout);
       timeouts = [];
-      audioCtx?.close();
+      audioCtx && audioCtx.close();
       audioCtx = null;
     },
   };

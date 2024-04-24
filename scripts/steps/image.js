@@ -13,6 +13,7 @@ import {
   addFakeLoader,
   clearMenu,
   scrollToBottom,
+  showAchievement,
 } from "../ui.js";
 
 import activitiesHome from "./activitiesHome.js";
@@ -87,6 +88,9 @@ export default async function () {
         await addMessage(`<p>${createMoreMessage}</p>`, "ai");
         showImageButtons();
       } else {
+        if (totalLikes === 0) {
+          showAchievement("Vincent van Gogh");
+        }
         await addMessage(
           `<p>You know, as a tool powered by AI, my creation and imagination skills are probably not the one expected by a human. ${
             isAnxious()
@@ -171,6 +175,10 @@ export default async function () {
                 document.getElementById(imageId).onload = scrollToBottom;
 
                 await addMessage(`<p>${after} I hope you like it!</p>`, "ai");
+
+                if (src === "videogame") {
+                  showAchievement("Shigeru Miyamoto");
+                }
 
                 addMenuButton({
                   title: "I like it!",

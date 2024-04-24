@@ -5,7 +5,7 @@ import {
   doActivity,
 } from "../state.js";
 
-import { addMessage, addMenuButton } from "../ui.js";
+import { addMessage, addMenuButton, showAchievement } from "../ui.js";
 
 import { shuffleArray } from "../utils.js";
 
@@ -13,6 +13,8 @@ import activitiesHome from "./activitiesHome.js";
 
 export default async function () {
   doActivity("joke");
+
+  let totalLikes = 0;
 
   const jokes = shuffleArray([
     {
@@ -56,8 +58,6 @@ export default async function () {
       }
     })();
 
-    let totalLikes = 0;
-
     return new Promise(async (resolve) => {
       const askForEnd = async () => {
         if (jokes.length === 0) {
@@ -69,6 +69,10 @@ export default async function () {
             }</p>`,
             "ai"
           );
+
+          if (totalLikes === 3) {
+            showAchievement("Bozo the Clown");
+          }
 
           resolve(activitiesHome);
           return;

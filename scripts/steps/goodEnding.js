@@ -1,6 +1,6 @@
 import { isAnxious, isVeryAnxious } from "../state.js";
 
-import { addMessage, getUserName } from "../ui.js";
+import { addMessage, getUserName, showAchievement } from "../ui.js";
 
 export default async function () {
   if (isAnxious()) {
@@ -76,5 +76,7 @@ export default async function () {
     false
   );
 
-  return true;
+  if (!isAnxious()) {
+    showAchievement("Nelson Mandela");
+  }
 }

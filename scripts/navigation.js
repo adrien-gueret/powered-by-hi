@@ -15,10 +15,10 @@ const renderSection = (section) => {
 
 export default function init(onChatStart) {
   for (let link of home.querySelectorAll('a[href="#"]')) {
-    link.addEventListener("click", (e) => {
+    link.onclick = (e) => {
       renderSection(chat);
       onChatStart(e.currentTarget.dataset);
-    });
+    };
   }
 
   renderSection(home);

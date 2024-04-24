@@ -1,6 +1,6 @@
 import { isAnxious, isVeryAnxious } from "../state.js";
 
-import { addMessage } from "../ui.js";
+import { addMessage, showAchievement } from "../ui.js";
 
 export default async function () {
   if (isAnxious()) {
@@ -66,5 +66,7 @@ export default async function () {
     false
   );
 
-  return false;
+  if (isVeryAnxious()) {
+    showAchievement("Ebenezer Scrooge");
+  }
 }

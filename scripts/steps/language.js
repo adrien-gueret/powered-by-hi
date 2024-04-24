@@ -1,6 +1,11 @@
 import { addAnxiety, addMaxPossibleAnxiety } from "../state.js";
 
-import { addMessage, addMenuButton, addFakeLoader } from "../ui.js";
+import {
+  addMessage,
+  addMenuButton,
+  addFakeLoader,
+  showAchievement,
+} from "../ui.js";
 
 export default async function () {
   await addMessage("<p>Which language do you prefer to use?</p>", "ai");
@@ -118,9 +123,10 @@ export default async function () {
               await addFakeLoader({ loadingTime: 1000, success: false });
 
               addAnxiety();
+              showAchievement("Sherlock Holmes");
 
               await addMessage(
-                `<p>According to the analysis, I don't support ${langLabel}.</p><p>I was not supposed to suggest you this locale as I handle only english. I'm sorry for the confusion.</p>
+                `<p>According to the analysis, I don't support ${langLabel}.</p><p>I was not supposed to suggest you this locale as I can only handle english. I'm sorry for the confusion.</p>
                 <p>I hope you aren't too disappointed. I suggest to continue my configuration with a simpler question.</p>`,
                 "ai",
                 false

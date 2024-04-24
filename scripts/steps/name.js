@@ -5,7 +5,13 @@ import {
   setHasTriedToHack,
 } from "../state.js";
 
-import { addMessage, addMenuButton, addMenuInput, setUserName } from "../ui.js";
+import {
+  addMessage,
+  addMenuButton,
+  addMenuInput,
+  setUserName,
+  showAchievement,
+} from "../ui.js";
 
 export default async function () {
   await addMessage("<p>What's your name?</p>", "ai");
@@ -68,6 +74,7 @@ export default async function () {
         } else {
           setUserName("Bad person");
           setHasTriedToHack();
+          showAchievement("Kevin Mitnick");
 
           addAnxiety(2);
 

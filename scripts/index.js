@@ -1,10 +1,19 @@
 import initNavigation from "./navigation.js";
-import { addAnxiety, addMaxPossibleAnxiety } from "./state.js";
-import initUI, { addMessage, clearMessages, clearMenu } from "./ui.js";
+import {
+  addAnxiety,
+  addMaxPossibleAnxiety,
+  resetAllExceptAchievements,
+} from "./state.js";
+import initUI, {
+  addMessage,
+  clearMessages,
+  clearMenu,
+  showAchievement,
+} from "./ui.js";
 
 import runSteps from "./steps.js";
 
-(async () => {
+(async function runGame() {
   const onChatStart = async (data) => {
     const isUnhappy = data.choice === "wtf";
 
@@ -39,7 +48,10 @@ import runSteps from "./steps.js";
       "ai"
     );
 
-    runSteps();
+    await runSteps();
+
+    resetAllExceptAchievements();
+    runGame();
   };
 
   initNavigation(onChatStart);
