@@ -307,6 +307,11 @@ form input + button:focus-visible {
   margin-bottom: 16px;
 }
 
+.resume .big-text {
+  margin-top: 8px;
+  display: block;
+}
+
 .achievements .resume hr {
   margin-bottom: 16px;
 }

@@ -307,7 +307,7 @@ export function showAllAchievements() {
   container.className = "achievements";
 
   const totalUnlocked = getUnlockedAchievements().length;
-  const label = document.createElement("p");
+  const label = document.createElement("div");
   label.className = "resume";
   label.innerHTML = `<hr />You have unlocked <b>${totalUnlocked}</b> achivement${
     totalUnlocked > 1 ? "s" : ""
