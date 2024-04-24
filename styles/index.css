@@ -1,0 +1,514 @@
+/* Global */
+
+body,
+html {
+  font-family: Segoe UI, system-ui;
+  font-size: 16px;
+  margin: 0;
+  padding: 0;
+  background-color: #f9f9f9;
+}
+
+main {
+  overflow: hidden;
+}
+
+.big-text {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+/* Logo */
+#logo-container {
+  text-align: center;
+  padding: 16px;
+  background-color: #000;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.logo {
+  font-family: "Courier New", Courier, monospace;
+  text-transform: lowercase;
+  font-weight: normal;
+  font-size: 1.5rem;
+  color: #fff;
+  background: #000;
+  margin: 0;
+  display: inline-flex;
+  flex-direction: row;
+  align-items: baseline;
+  gap: 8px;
+  padding-left: 8px;
+  border: 1px solid #000;
+  border-radius: 20px 0 0 10px/20px;
+  transform-origin: left center;
+}
+
+.logo span {
+  text-transform: uppercase;
+  font-weight: bolder;
+  font-size: 2rem;
+  padding: 4px 8px;
+  background: #fff;
+  color: #000;
+  transform: rotate(-5deg);
+  border-radius: 3px;
+  transition: opacity 333ms ease-in;
+}
+
+/* Avatars */
+
+.avatar {
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  display: inline-block;
+  border-radius: 50%;
+  background: #fff;
+  padding: 8px;
+  width: 36px;
+  height: 36px;
+}
+
+.avatar::before {
+  display: inline-block;
+  content: "";
+  width: 36px;
+  height: 36px;
+  background-image: url(./avatars.png);
+  background-repeat: no-repeat;
+}
+
+.avatar.ai::before {
+  background-position: left;
+}
+
+.avatar.hi::before {
+  background-position: center;
+}
+
+.avatar.player::before {
+  background-position: right;
+}
+
+/* Sections */
+section {
+  display: none;
+  flex-direction: column;
+  padding-bottom: 32px;
+}
+
+section.in {
+  display: flex;
+  animation: fromBottom 333ms ease-in-out;
+}
+
+.global-presentation {
+  align-items: center;
+  padding: 32px 0;
+  box-sizing: border-box;
+  flex-direction: column;
+}
+
+.header {
+  text-align: center;
+  margin-top: 32px;
+}
+
+/* Forms */
+
+form {
+  display: flex;
+}
+
+form input,
+output {
+  background: white;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-right-width: 0;
+  color: #000;
+  padding: 16px 16px;
+  border-radius: 8px;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  font-size: 1.1rem;
+}
+
+output {
+  display: block;
+  border-radius: 8px;
+  border-right-width: 1px;
+  min-height: 56px;
+  box-sizing: border-box;
+  cursor: not-allowed;
+}
+
+form input:hover {
+  border-color: rgba(0, 0, 0, 0.5);
+  background: #f9f9f9;
+}
+
+form input:focus,
+form input:focus-visible {
+  border-color: rgba(0, 0, 0, 1);
+  outline: 0;
+}
+
+form input + button {
+  color: #fff;
+  background-color: #000;
+  border: 0;
+  border-radius: 8px;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  flex-shrink: 0;
+  width: 58px;
+  cursor: pointer;
+  opacity: 0.7;
+  font-size: 1.1rem;
+}
+
+form input + button:hover,
+form input + button:focus-visible {
+  opacity: 1;
+  outline: 0;
+}
+
+/* Choices */
+
+.choice-menu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  margin-top: auto;
+  display: flex;
+  gap: 16px;
+  padding: 16px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.choice-item {
+  display: flex;
+  --bg-color: #fff;
+}
+
+.choice {
+  background: var(--bg-color);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  color: #000;
+  padding: 16px 16px;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  text-decoration: none;
+  text-align: left;
+}
+
+.choice:hover {
+  background: #f9f9f9;
+  border: 1px solid rgba(0, 0, 0, 0.5);
+}
+
+.choice-title {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 4px;
+}
+
+.choice-description {
+  display: block;
+  opacity: 0.5;
+}
+
+/* Messages */
+
+.messages {
+  list-style: none;
+  display: flex;
+  text-align: left;
+  gap: 24px;
+  flex-direction: column;
+  padding: 16px;
+  margin: auto;
+  max-width: 1024px;
+  background: white;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  color: rgba(0, 0, 0, 0.8);
+}
+
+.message {
+  display: flex;
+  gap: 8px;
+  padding: 16px 8px 8px;
+  animation: fromBottom 333ms ease-in-out;
+}
+
+.message .content {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.message .content-message p {
+  margin: 8px 0;
+}
+
+.message .content-message img {
+  width: 100%;
+  max-width: 400px;
+}
+
+.content-message.system {
+  font-style: italic;
+  color: rgba(0, 0, 0, 0.5);
+}
+
+.message .sender-name {
+  margin: 12px 0;
+  font-weight: bold;
+}
+
+.message .content-message {
+  margin: 0;
+}
+
+.message .big-text {
+  font-size: 1.1rem;
+}
+
+.message + .message {
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.message hr {
+  margin: 24px 8px;
+}
+
+.message a,
+.message a:visited {
+  color: rgb(32, 130, 241);
+}
+
+/* Loader */
+.loader {
+  --color: rgba(0, 0, 0, 0.5);
+  display: inline-block;
+  height: 32px;
+  width: 32px;
+  margin: 4px 0 4px 8px;
+  vertical-align: middle;
+  animation: loaderContainer 2s cubic-bezier(0.77, 0, 0.175, 1) infinite;
+}
+
+@keyframes loaderContainer {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.loader::before {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: auto;
+  margin: auto;
+  width: 8px;
+  height: 8px;
+  background: var(--color);
+  border-radius: 50%;
+  animation: loaderBefore 2s cubic-bezier(0.77, 0, 0.175, 1) infinite;
+}
+
+@keyframes loaderBefore {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(24px, 0, 0) scale(0.5);
+  }
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+.loader::after {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: auto;
+  bottom: 0;
+  right: 0;
+  margin: auto;
+  width: 8px;
+  height: 8px;
+  background: var(--color);
+  border-radius: 50%;
+  animation: loaderAfter 2s cubic-bezier(0.77, 0, 0.175, 1) infinite;
+}
+
+@keyframes loaderAfter {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(-24px, 0, 0) scale(0.5);
+  }
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+.loader span {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  margin: auto;
+  height: 32px;
+  width: 32px;
+}
+.loader span::before {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: auto;
+  right: 0;
+  margin: auto;
+  width: 8px;
+  height: 8px;
+  background: var(--color);
+  border-radius: 50%;
+  animation: loaderSpanBefore 2s cubic-bezier(0.77, 0, 0.175, 1) infinite;
+}
+@keyframes loaderSpanBefore {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(0, 24px, 0) scale(0.5);
+  }
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+.loader span::after {
+  content: "";
+  display: block;
+  position: absolute;
+  top: auto;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  margin: auto;
+  width: 8px;
+  height: 8px;
+  background: var(--color);
+  border-radius: 50%;
+  animation: loaderSpanAfter 2s cubic-bezier(0.77, 0, 0.175, 1) infinite;
+}
+
+@keyframes loaderSpanAfter {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(0, -24px, 0) scale(0.5);
+  }
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+/* Success icon */
+
+.checkmark.success {
+  --color: #4bb71b;
+}
+
+.checkmark.failure {
+  --color: #b71b1b;
+}
+
+.checkmark {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: inline-block;
+  stroke-width: 2;
+  stroke: var(--color);
+  stroke-miterlimit: 10;
+  box-shadow: inset 0px 0px 0px var(--color);
+  animation: fill 0.4s ease-in-out 0.4s forwards,
+    scale 0.3s ease-in-out 0.9s both;
+  position: relative;
+  margin: 4px 0 4px 8px;
+  vertical-align: middle;
+}
+
+.checkmark-circle {
+  stroke-dasharray: 166;
+  stroke-dashoffset: 166;
+  stroke-width: 2;
+  stroke-miterlimit: 10;
+  stroke: var(--color);
+  fill: #fff;
+  animation: stroke 0.6s cubic-bezier(0.65, 0, 0.45, 1) forwards;
+}
+
+.checkmark-check {
+  transform-origin: 50% 50%;
+  stroke-dasharray: 48;
+  stroke-dashoffset: 48;
+  animation: stroke 0.3s cubic-bezier(0.65, 0, 0.45, 1) 0.8s forwards;
+}
+
+@keyframes stroke {
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes scale {
+  0%,
+  100% {
+    transform: none;
+  }
+
+  50% {
+    transform: scale3d(1.1, 1.1, 1);
+  }
+}
+
+@keyframes fill {
+  100% {
+    box-shadow: inset 0px 0px 0px 30px #4bb71b;
+  }
+}
+
+/* Other animations */
+
+@keyframes fromBottom {
+  from {
+    transform: translateY(100vh);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}

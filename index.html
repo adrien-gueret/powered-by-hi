@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <link
+      id="favicon"
+      rel="icon"
+      type="image/png"
+      href="./styles/ai.png"
+      sizes="400x400"
+    />
+    <title>powered by HI</title>
+    <link rel="stylesheet" type="text/css" href="./styles/index.css" />
+  </head>
+  <body>
+    <header id="logo-container">
+      <h1 class="logo">
+        Powered By <span id="powered-by-target" style="opacity: 0">HI</span>
+      </h1>
+    </header>
+
+    <main>
+      <section id="home" class="global-presentation">
+        <div class="header">
+          <div class="avatar ai"></div>
+
+          <div id="initial-message">
+            <p class="big-text">Oh, hi there! 👋</p>
+
+            <p>I am your personal assistant.</p>
+
+            <p>
+              I am <strong>powered by AI</strong> (<b>A</b>rtifical
+              <b>I</b>ntelligence).
+            </p>
+
+            <p>
+              I am here to help you find solutions for each of your problems.
+            </p>
+          </div>
+
+          <menu class="choice-menu">
+            <li class="choice-item">
+              <a href="#" data-choice="ok" class="choice">
+                <span class="choice-title">Ok, cool!</span>
+                <span class="choice-description"
+                  >Can't wait to play with this AI!</span
+                >
+              </a>
+            </li>
+            <li class="choice-item">
+              <a href="#" data-choice="wtf" class="choice">
+                <span class="choice-title">WTF is that...?</span>
+                <span class="choice-description"
+                  >I thought this was a game...</span
+                >
+              </a>
+            </li>
+          </menu>
+        </div>
+      </section>
+
+      <section id="chat">
+        <div class="header">
+          <ul id="messages" class="messages"></ul>
+        </div>
+
+        <menu id="chat-menu" class="choice-menu"></menu>
+      </section>
+    </main>
+    <script type="module" src="./scripts/index.js"></script>
+  </body>
+</html>
