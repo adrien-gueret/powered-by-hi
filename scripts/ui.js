@@ -313,8 +313,10 @@ export function showAllAchievements() {
     totalUnlocked > 1 ? "s" : ""
   } out of <b>${achievements.length}</b>!<br />${"⭐".repeat(totalUnlocked)}`;
 
+  console.log(totalUnlocked, achievements.length);
+
   if (totalUnlocked === achievements.length) {
-    label.innerHTM += '<br /><span class="big-text">CONGRATULATIONS!</span>';
+    label.innerHTML += '<br /><span class="big-text">CONGRATULATIONS!</span>';
   }
 
   container.appendChild(label);

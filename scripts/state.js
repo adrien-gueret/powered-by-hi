@@ -54,7 +54,7 @@ export const achievements = [
   {
     title: "Bozo the Clown",
     emoji: "🤡",
-    description: "Laugh out of loud",
+    description: "Laugh out loud",
   },
   {
     title: "Nelson Mandela",
