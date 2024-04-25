@@ -4,12 +4,7 @@ import {
   addMaxPossibleAnxiety,
   resetAllExceptAchievements,
 } from "./state.js";
-import initUI, {
-  addMessage,
-  clearMessages,
-  clearMenu,
-  showAchievement,
-} from "./ui.js";
+import initUI, { addMessage, clearMessages, clearMenu } from "./ui.js";
 
 import runSteps from "./steps.js";
 

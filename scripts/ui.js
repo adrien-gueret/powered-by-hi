@@ -269,7 +269,7 @@ export function showAchievement(name) {
       )) {
         if (achievementNotification !== popover) {
           const { top } = achievementNotification.style;
-          const prevValue = top ? parseInt(top, 10) : 100;
+          const prevValue = top ? parseInt(top, 10) : 120;
           const newValue = parseInt(prevValue, 10) + popover.clientHeight + 40;
           achievementNotification.style.top = `${newValue}px`;
         }

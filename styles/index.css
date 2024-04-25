@@ -337,7 +337,7 @@ form input + button:focus-visible {
   position: fixed;
   inset: unset;
   right: 8px;
-  top: 100px;
+  top: 120px;
   cursor: pointer;
   animation: fromRight 333ms ease-in-out;
   transition: top 333ms ease-in-out;
@@ -345,12 +345,12 @@ form input + button:focus-visible {
 }
 
 [popover] .achievement-title::before {
-  content: "Achievement unlocked!";
+  content: "Achievement unlocked! ⭐ ";
   display: block;
   position: absolute;
-  top: -20px;
+  top: -30px;
   background: #000;
-  padding: 4px 8px;
+  padding: 4px 8px 8px 8px;
   border-radius: 6px;
   border-bottom-left-radius: 0;
   left: 0;

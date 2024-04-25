@@ -99,6 +99,8 @@ export default async function () {
                 "player"
               );
 
+              showAchievement("Sherlock Holmes");
+
               await addMessage(
                 `<p>Sure, please wait while I debug this problem.</p><em>1. Checking file encoding</em>`,
                 "ai"
@@ -123,7 +125,6 @@ export default async function () {
               await addFakeLoader({ loadingTime: 1000, success: false });
 
               addAnxiety();
-              showAchievement("Sherlock Holmes");
 
               await addMessage(
                 `<p>According to the analysis, I don't support ${langLabel}.</p><p>I was not supposed to suggest you this locale as I can only handle english. I'm sorry for the confusion.</p>
