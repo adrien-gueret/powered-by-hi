@@ -358,6 +358,7 @@ form input + button:focus-visible {
 }
 
 .achievement-image {
+  flex-shrink: 0;
   display: block;
   text-align: center;
   font-size: 2rem;

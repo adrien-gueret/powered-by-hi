@@ -335,7 +335,7 @@ export function showAllAchievements() {
 
   chatMenu.parentNode.insertBefore(container, chatMenu);
 
-  window.scrollBy({ top: 40, behavior: "smooth" });
+  window.scrollBy({ top: 150, behavior: "smooth" });
 }
 
 export default function init() {
