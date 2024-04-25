@@ -1,13 +1,13 @@
 import { shuffleArray } from "./utils.js";
 
-function play(audioCtx, oscillatorType, freq, dur) {
+function play(audioCtx, oscillatorType, freq, dur, volume = 0.01) {
   const osc = audioCtx.createOscillator();
   const gainNode = audioCtx.createGain();
 
   osc.frequency.value = freq;
   osc.type = oscillatorType;
 
-  gainNode.gain.setValueAtTime(0.5, audioCtx.currentTime);
+  gainNode.gain.setValueAtTime(volume, audioCtx.currentTime);
   gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + dur);
 
   osc.connect(gainNode);
@@ -33,7 +33,7 @@ function initSoftMusic() {
       const rhythmVariation = baseRhythm * (1.15 + Math.random() * 0.1);
       timeouts.push(
         setTimeout(
-          () => play(audioCtx, "sine", note, rhythmVariation),
+          () => play(audioCtx, "sine", note, rhythmVariation, 0.1),
           totalTime * 1000
         )
       );
