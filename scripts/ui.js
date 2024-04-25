@@ -30,7 +30,7 @@ export const switchToHI = async () => {
 
   poweredByTarget.innerHTML = "HI";
   document.title = "powered by HI";
-  favicon.href = "./styles/hi.png";
+  favicon.href = "./styles/hi.svg";
 
   animation = poweredByTarget.animate([{ transform: `rotate(360deg)` }], {
     duration: 400,
