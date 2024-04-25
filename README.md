@@ -40,11 +40,15 @@ How would **you** feel about that?
 
 I hope you've liked this game :)
 
+![Player icon](https://img.itch.zone/aW1nLzE1ODg1NzAzLnBuZw==/original/k%2ForXZ.png) **Achievements**
+
+In order to still have the impression of playing a game, there are some achievements to unlock, depending on your replies to the AI.
+Will you find the **10** achievements?
+
 ![Player icon](https://img.itch.zone/aW1nLzE1ODg1NzAzLnBuZw==/original/k%2ForXZ.png) **Challenges**
 
 - **GitHub**: well, this is the GitHub repository!
 - **NPC**: the whole concept of the game is to interact with an NPC
-- **js13kGames**: I'll try to optimize the game, but I will probably fail :'D
 
 ![Player icon](https://img.itch.zone/aW1nLzE1ODg1NzAzLnBuZw==/original/k%2ForXZ.png) **Cross-reference**
 
